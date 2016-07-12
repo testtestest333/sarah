@@ -25,8 +25,8 @@ import os
 import re
 
 BASE_CMD = '^(.+)$'
-# CMD_FILE = os.path.join(os.getenv['ZOE_HOME'], 'etc', 'sarah', 'commands.json')
-CMD_FILE = './commands.json'
+CMD_FILE = os.path.join(os.getenv['ZOE_HOME'], 'etc', 'sarah', 'commands.json')
+# CMD_FILE = './commands.json'
 
 
 def get():
