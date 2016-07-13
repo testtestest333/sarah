@@ -1,0 +1,5 @@
+{
+    "^gini (\\w+)$": "action=gini&country=$0",
+    "^gini (\\w+) (\\d+)$": "action=gini-year&country=$0&year=$1",
+    "^average gini (\\d+)$": "action=avg-gini&year=$0"
+}
