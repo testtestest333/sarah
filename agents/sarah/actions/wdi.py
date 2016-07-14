@@ -63,7 +63,7 @@ def gini(config, parser):
     if value:
         return 'El Gini para %s es %.4f' % (country, value)
 
-    return 'No hay Gini para %s' % country
+    return 'No hay valor de Gini para %s' % country
 
 def gini_year(config, parser):
     """Obtain GINI for a given country in a specific year.
@@ -121,7 +121,7 @@ def gini_year(config, parser):
     if value:
         return 'El Gini para %s en %d es %.4f' % (country, year, value)
 
-    return 'No hay GINI para %s en %d' % (country, year)
+    return 'No hay valor de Gini para %s en %d' % (country, year)
 
 def pib(config, parser):
     """Obtain latest PIB for a given country.
