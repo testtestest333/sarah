@@ -19,5 +19,25 @@ action_map = {
     'gini-year': {
         'conf': 'wdi_csv',
         'func': wdi.gini_year
+    },
+
+    'pib' : {
+        'conf': 'wdi_csv',
+        'func': wdi.pib
+    },
+
+    'pib-year': {
+        'conf': 'wdi_csv',
+        'func': wdi.pib_year
+    },
+
+    'pibpc': {
+        'conf': 'wdi_csv',
+        'func': wdi.pibpc
+    },
+
+    'pibpc-year': {
+        'conf': 'wdi_csv',
+        'func': wdi.pibpc_year
     }
 }

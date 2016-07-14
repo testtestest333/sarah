@@ -1,5 +1,9 @@
 {
     "^gini (\\w+)$": "action=gini&country=$0",
     "^gini (\\w+) (\\d+)$": "action=gini-year&country=$0&year=$1",
-    "^average gini (\\d+)$": "action=avg-gini&year=$0"
+    "^average gini (\\d+)$": "action=avg-gini&year=$0",
+    "^pib (\\w+)$":"action=pib&country=$0",
+    "^pib (\\w+) (\\d+)$": "action=pib-year&country=$0&year=$1",
+    "^pibpc (\\w+)$":"action=pibpc&country=$0",
+    "^pibpc (\\w+) (\\d+)$": "action=pibpc-year&country=$0&year=$1"
 }

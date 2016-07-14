@@ -122,3 +122,225 @@ def gini_year(config, parser):
         return 'GINI %s (%d): %.4f' % (country, year, value)
 
     return 'Could not find GINI for %s in %d' % (country, year)
+
+def pib(config, parser):
+    """Obtain latest PIB for a given country.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        country (str): Country to search (from parser).
+    """
+    datafile = config.get('path')
+
+    if not os.path.isfile(datafile):
+        return 'Could not read data file'
+
+    # Get country
+    country = parser.get('country')
+
+    if not country:
+        return 'Failed to parse country name'
+
+
+    # Obtain value
+    value = ''
+
+    with open(datafile, 'r', encoding='mac_roman', newline='') as f:
+        reader = csv.reader(f)
+
+        # Read line by line
+        for line in reader:
+
+            # Check country
+            if line[INDEX_COUNTRY] != country:
+                continue
+
+            # Check PIB
+            if not 'NY.GDP.MKTP.CD' in line:
+                continue
+
+            # Start from the end and stop when a numerical value is reached
+            for col in reversed(line):
+                if col:
+                    try:
+                        value = float(col) / 1000000
+
+                    except:
+                        # Not a number
+                        pass
+
+                    break
+
+    if value:
+        return 'PIB %s: "Million $" %.2f' % (country, value)
+
+    return 'Could not find PIB for %s' % country
+
+def pib_year(config, parser):
+    """Obtain PIB for a given country in a specific year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        country (str): Country to search (from parser).
+    """
+    datafile = config.get('path')
+
+    if not os.path.isfile(datafile):
+        return 'Could not read data file'
+
+    # Get country
+    country = parser.get('country')
+
+    if not country:
+        return 'Failed to parse country name'
+
+    # Get year
+    try:
+        year = int(parser.get('year'))
+
+    except:
+        return 'Invalid year'
+
+
+    # Obtain value
+    value = ''
+
+    with open(datafile, 'r', encoding='mac_roman', newline='') as f:
+        reader = csv.reader(f)
+
+        # Read line by line
+        for line in reader:
+
+            # Check country
+            if line[INDEX_COUNTRY] != country:
+                continue
+
+            # Check PIB
+            if not 'NY.GDP.MKTP.CD' in line:
+                continue
+
+            # Get specific column
+            col = INDEX_YEAR + (year - 1960)
+
+            try:
+                value = float(line[col]) / 1000000
+
+            except:
+                # Not a number
+                pass
+
+    if value:
+        return 'PIB %s (%d): "Million $" %.2f' % (country, year, value)
+
+    return 'Could not find PIB for %s in %d' % (country, year)
+
+def pibpc(config, parser):
+    """Obtain latest PIBpc for a given country.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        country (str): Country to search (from parser).
+    """
+    datafile = config.get('path')
+
+    if not os.path.isfile(datafile):
+        return 'Could not read data file'
+
+    # Get country
+    country = parser.get('country')
+
+    if not country:
+        return 'Failed to parse country name'
+
+
+    # Obtain value
+    value = ''
+
+    with open(datafile, 'r', encoding='mac_roman', newline='') as f:
+        reader = csv.reader(f)
+
+        # Read line by line
+        for line in reader:
+
+            # Check country
+            if line[INDEX_COUNTRY] != country:
+                continue
+
+            # Check PIB
+            if not 'NY.GDP.PCAP.CD' in line:
+                continue
+
+            # Start from the end and stop when a numerical value is reached
+            for col in reversed(line):
+                if col:
+                    try:
+                        value = float(col)
+
+                    except:
+                        # Not a number
+                        pass
+
+                    break
+
+    if value:
+        return 'PIB %s: "$" %.2f' % (country, value)
+
+    return 'Could not find PIBpc for %s' % country
+
+def pibpc_year(config, parser):
+    """Obtain PIBpc for a given country in a specific year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        country (str): Country to search (from parser).
+    """
+    datafile = config.get('path')
+
+    if not os.path.isfile(datafile):
+        return 'Could not read data file'
+
+    # Get country
+    country = parser.get('country')
+
+    if not country:
+        return 'Failed to parse country name'
+
+    # Get year
+    try:
+        year = int(parser.get('year'))
+
+    except:
+        return 'Invalid year'
+
+
+    # Obtain value
+    value = ''
+
+    with open(datafile, 'r', encoding='mac_roman', newline='') as f:
+        reader = csv.reader(f)
+
+        # Read line by line
+        for line in reader:
+
+            # Check country
+            if line[INDEX_COUNTRY] != country:
+                continue
+
+            # Check PIB
+            if not 'NY.GDP.PCAP.CD' in line:
+                continue
+
+            # Get specific column
+            col = INDEX_YEAR + (year - 1960)
+
+            try:
+                value = float(line[col])
+
+            except:
+                # Not a number
+                pass
+
+    if value:
+        return 'PIB %s (%d): "$" %.2f' % (country, year, value)
+
+    return 'Could not find PIBpc for %s in %d' % (country, year)
