@@ -39,5 +39,15 @@ action_map = {
     'pibpc-year': {
         'conf': 'wdi_csv',
         'func': wdi.pibpc_year
+    },
+
+    'desemp' : {
+        'conf': 'wdi_csv',
+        'func': wdi.desemp
+    },
+
+    'desemp-year' : {
+        'conf': 'wdi_csv',
+        'func': wdi.desemp_year
     }
 }

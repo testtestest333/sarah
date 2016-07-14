@@ -5,5 +5,7 @@
     "^pib (\\w+)$":"action=pib&country=$0",
     "^pib (\\w+) (\\d+)$": "action=pib-year&country=$0&year=$1",
     "^pibpc (\\w+)$":"action=pibpc&country=$0",
-    "^pibpc (\\w+) (\\d+)$": "action=pibpc-year&country=$0&year=$1"
+    "^pibpc (\\w+) (\\d+)$": "action=pibpc-year&country=$0&year=$1",
+    "^desemp (\\w+)$":"action=desemp&country=$0",
+    "^desemp (\\w+) (\\d+)$": "action=desemp-year&country=$0&year=$1"
 }

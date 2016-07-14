@@ -266,7 +266,7 @@ def pibpc(config, parser):
             if line[INDEX_COUNTRY] != country:
                 continue
 
-            # Check PIB
+            # Check PIBpc
             if not 'NY.GDP.PCAP.CD' in line:
                 continue
 
@@ -326,7 +326,7 @@ def pibpc_year(config, parser):
             if line[INDEX_COUNTRY] != country:
                 continue
 
-            # Check PIB
+            # Check PIBpc
             if not 'NY.GDP.PCAP.CD' in line:
                 continue
 
@@ -344,3 +344,115 @@ def pibpc_year(config, parser):
         return 'El PIB per Cápita de %s en %d es $ %.2f' % (country, year, value)
 
     return 'No hay PIB per Cápita para %s en %d' % (country, year)
+
+def desemp(config, parser):
+    """Obtain latest Unenployment for a given country.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        country (str): Country to search (from parser).
+    """
+    datafile = config.get('path')
+
+    if not os.path.isfile(datafile):
+        return 'No encuentro la base de datos'
+
+    # Get country
+    country = parser.get('country')
+
+    if not country:
+        return '¿Qué país es ese?'
+
+
+    # Obtain value
+    value = ''
+
+    with open(datafile, 'r', encoding='mac_roman', newline='') as f:
+        reader = csv.reader(f)
+
+        # Read line by line
+        for line in reader:
+
+            # Check country
+            if line[INDEX_COUNTRY] != country:
+                continue
+
+            # Check Desemp
+            if not 'SL.UEM.TOTL.NE.ZS' in line:
+                continue
+
+            # Start from the end and stop when a numerical value is reached
+            for col in reversed(line):
+                if col:
+                    try:
+                        value = float(col)
+
+                    except:
+                        # Not a number
+                        pass
+
+                    break
+
+    if value:
+        return 'El Desempleo en %s es del %.4f %' % (country, value)
+
+    return 'No hay tasa de Desempleo en %s' % country
+
+def gini_year(config, parser):
+    """Obtain Unemployment for a given country in a specific year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        country (str): Country to search (from parser).
+    """
+    datafile = config.get('path')
+
+    if not os.path.isfile(datafile):
+        return 'No encuentro la base de datos'
+
+    # Get country
+    country = parser.get('country')
+
+    if not country:
+        return '¿Qué país es ese?'
+
+    # Get year
+    try:
+        year = int(parser.get('year'))
+
+    except:
+        return '¿Cuándo dices?'
+
+
+    # Obtain value
+    value = ''
+
+    with open(datafile, 'r', encoding='mac_roman', newline='') as f:
+        reader = csv.reader(f)
+
+        # Read line by line
+        for line in reader:
+
+            # Check country
+            if line[INDEX_COUNTRY] != country:
+                continue
+
+            # Check Desemp
+            if not 'SL.UEM.TOTL.NE.ZS' in line:
+                continue
+
+            # Get specific column
+            col = INDEX_YEAR + (year - 1960)
+
+            try:
+                value = float(line[col])
+
+            except:
+                # Not a number
+                pass
+
+    if value:
+        return 'El Desempleo en %s en %d es del %.2f %' % (country, year, value)
+
+    return 'No hay tasa de Desempleo en %s en %d' % (country, year)
+
