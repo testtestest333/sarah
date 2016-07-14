@@ -172,7 +172,7 @@ def pib(config, parser):
                     break
 
     if value:
-        return 'PIB %s: "Million $" %.2f' % (country, value)
+        return 'PIB %s: %.2f Million $' % (country, value)
 
     return 'Could not find PIB for %s' % country
 
@@ -230,7 +230,7 @@ def pib_year(config, parser):
                 pass
 
     if value:
-        return 'PIB %s (%d): "Million $" %.2f' % (country, year, value)
+        return 'PIB %s (%d): %.2f Million $' % (country, year, value)
 
     return 'Could not find PIB for %s in %d' % (country, year)
 
@@ -283,7 +283,7 @@ def pibpc(config, parser):
                     break
 
     if value:
-        return 'PIB %s: "$" %.2f' % (country, value)
+        return 'PIB %s: $ %.2f' % (country, value)
 
     return 'Could not find PIBpc for %s' % country
 
@@ -341,6 +341,6 @@ def pibpc_year(config, parser):
                 pass
 
     if value:
-        return 'PIB %s (%d): "$" %.2f' % (country, year, value)
+        return 'PIB %s (%d): $ %.2f' % (country, year, value)
 
     return 'Could not find PIBpc for %s in %d' % (country, year)
