@@ -22,13 +22,13 @@ def gini(config, parser):
     datafile = config.get('path')
 
     if not os.path.isfile(datafile):
-        return 'Could not read data file'
+        return 'No encuentro la base de datos'
 
     # Get country
     country = parser.get('country')
 
     if not country:
-        return 'Failed to parse country name'
+        return '¿Qué país es ese?'
 
 
     # Obtain value
@@ -61,9 +61,9 @@ def gini(config, parser):
                     break
 
     if value:
-        return 'GINI %s: %.4f' % (country, value)
+        return 'El Gini para %s es %.4f' % (country, value)
 
-    return 'Could not find GINI for %s' % country
+    return 'No hay Gini para %s' % country
 
 def gini_year(config, parser):
     """Obtain GINI for a given country in a specific year.
@@ -75,20 +75,20 @@ def gini_year(config, parser):
     datafile = config.get('path')
 
     if not os.path.isfile(datafile):
-        return 'Could not read data file'
+        return 'No encuentro la base de datos'
 
     # Get country
     country = parser.get('country')
 
     if not country:
-        return 'Failed to parse country name'
+        return '¿Qué país es ese?'
 
     # Get year
     try:
         year = int(parser.get('year'))
 
     except:
-        return 'Invalid year'
+        return '¿Cuándo dices?'
 
 
     # Obtain value
@@ -119,9 +119,9 @@ def gini_year(config, parser):
                 pass
 
     if value:
-        return 'GINI %s (%d): %.4f' % (country, year, value)
+        return 'El Gini para %s en %d es %.4f' % (country, year, value)
 
-    return 'Could not find GINI for %s in %d' % (country, year)
+    return 'No hay GINI para %s en %d' % (country, year)
 
 def pib(config, parser):
     """Obtain latest PIB for a given country.
@@ -133,13 +133,13 @@ def pib(config, parser):
     datafile = config.get('path')
 
     if not os.path.isfile(datafile):
-        return 'Could not read data file'
+        return 'No encuentro la base de datos'
 
     # Get country
     country = parser.get('country')
 
     if not country:
-        return 'Failed to parse country name'
+        return '¿Qué país es ese?'
 
 
     # Obtain value
@@ -172,9 +172,9 @@ def pib(config, parser):
                     break
 
     if value:
-        return 'PIB %s: %.2f Million $' % (country, value)
+        return 'El PIB en %s es de %.2f Millones de $' % (country, value)
 
-    return 'Could not find PIB for %s' % country
+    return 'No hay PIB en %s' % country
 
 def pib_year(config, parser):
     """Obtain PIB for a given country in a specific year.
@@ -186,20 +186,20 @@ def pib_year(config, parser):
     datafile = config.get('path')
 
     if not os.path.isfile(datafile):
-        return 'Could not read data file'
+        return 'No encuentro la base de datos'
 
     # Get country
     country = parser.get('country')
 
     if not country:
-        return 'Failed to parse country name'
+        return '¿Qué país es ese?'
 
     # Get year
     try:
         year = int(parser.get('year'))
 
     except:
-        return 'Invalid year'
+        return '¿Cuándo dices?'
 
 
     # Obtain value
@@ -230,9 +230,9 @@ def pib_year(config, parser):
                 pass
 
     if value:
-        return 'PIB %s (%d): %.2f Million $' % (country, year, value)
+        return 'El PIB de %s en %d es de %.2f Millones de $' % (country, year, value)
 
-    return 'Could not find PIB for %s in %d' % (country, year)
+    return 'No hay PIB de %s en %d' % (country, year)
 
 def pibpc(config, parser):
     """Obtain latest PIBpc for a given country.
@@ -244,13 +244,13 @@ def pibpc(config, parser):
     datafile = config.get('path')
 
     if not os.path.isfile(datafile):
-        return 'Could not read data file'
+        return 'No encuentro la base de datos'
 
     # Get country
     country = parser.get('country')
 
     if not country:
-        return 'Failed to parse country name'
+        return '¿Qué país es ese?'
 
 
     # Obtain value
@@ -283,9 +283,9 @@ def pibpc(config, parser):
                     break
 
     if value:
-        return 'PIB %s: $ %.2f' % (country, value)
+        return 'El PIB per Cápita de %s es $ %.2f' % (country, value)
 
-    return 'Could not find PIBpc for %s' % country
+    return 'No hay PIB per Cápita de %s' % country
 
 def pibpc_year(config, parser):
     """Obtain PIBpc for a given country in a specific year.
@@ -297,20 +297,20 @@ def pibpc_year(config, parser):
     datafile = config.get('path')
 
     if not os.path.isfile(datafile):
-        return 'Could not read data file'
+        return 'No encuentro la base de datos'
 
     # Get country
     country = parser.get('country')
 
     if not country:
-        return 'Failed to parse country name'
+        return '¿Qué país es ese?'
 
     # Get year
     try:
         year = int(parser.get('year'))
 
     except:
-        return 'Invalid year'
+        return '¿Cuándo dices?'
 
 
     # Obtain value
@@ -341,6 +341,6 @@ def pibpc_year(config, parser):
                 pass
 
     if value:
-        return 'PIB %s (%d): $ %.2f' % (country, year, value)
+        return 'El PIB per Cápita de %s en %d es $ %.2f' % (country, year, value)
 
-    return 'Could not find PIBpc for %s in %d' % (country, year)
+    return 'No hay PIB per Cápita para %s en %d' % (country, year)
