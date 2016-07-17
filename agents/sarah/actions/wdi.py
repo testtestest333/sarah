@@ -7,19 +7,28 @@ import os
 
 #Indices
 INDEX_COUNTRY = 0
+INDEX_ID = 1
 INDEX_GINI = 3
 INDEX_YEAR = 4 # Starts at 1960
 
 FIRST_YEAR = 1960
 
+# Groups to skip in some cases
+GROUPS = [
+    'LDC', 'LIC', 'LMC', 'LMY', 'LTE', 'MEA', 'MIC', 'MNA', 'OED', 'OSS',
+    'PRE', 'PST', 'SSA', 'SSF', 'SST', 'TEA', 'TEC', 'TLA', 'TMN', 'TSA',
+    'TSS', 'UMC', 'WLD'
+]
 
-def _get_avg(config, key, year):
+
+def _get_avg(config, key, year, skip_list=GROUPS):
     """Obtain average of values for a key in a year.
 
     Args:
         config (ConfigParser): Information about datafile to use.
         key (str): Key to search.
         year (int): Year to obtain (from parser).
+        skip_list (list[str]): IDs to skip.
 
     Returns:
         Tuple: Boolean, Value (usually float), Error string
@@ -54,6 +63,10 @@ def _get_avg(config, key, year):
             if not key in line:
                 continue
 
+            # Check if it has to be skipped
+            if line[INDEX_ID] in skip_list:
+                continue
+
             # Get specific column
             col = INDEX_YEAR + (year - FIRST_YEAR)
 
@@ -82,13 +95,14 @@ def _get_avg(config, key, year):
     return True, result, None
 
 
-def _get_count(config, key, year):
+def _get_count(config, key, year, skip_list=GROUPS):
     """Obtain number of countries that have a value for a key in a year.
 
     Args:
         config (ConfigParser): Information about datafile to use.
         key (str): Key to search.
         year (int): Year to obtain (from parser).
+        skip_list (list[str]): IDs to skip.
 
     Returns:
         Tuple: Boolean, Value (usually float), Error string
@@ -120,6 +134,10 @@ def _get_count(config, key, year):
 
             # Check key
             if not key in line:
+                continue
+
+            # Check if it has to be skipped
+            if line[INDEX_ID] in skip_list:
                 continue
 
             # Get specific column
