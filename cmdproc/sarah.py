@@ -24,7 +24,7 @@ import json
 import os
 import re
 
-BASE_CMD = '^(.*)$'
+BASE_CMD = '^sarah (.+)$'
 CMD_FILE = os.path.join(os.getenv('ZOE_HOME'), 'etc', 'sarah', 'commands.json')
 # CMD_FILE = './commands.json'
 
@@ -40,13 +40,15 @@ def run(args):
         # File does not exist
         return
 
+    original = args.original.lstrip('sarah ')
+
     # Parse the commands
     with open(CMD_FILE) as f:
         commands = json.load(f)
 
     for key in commands:
-        print(key)
-        match = re.findall(key, args.original)
+        # match = re.findall(key, args.original)
+        match = re.findall(key, original)
 
         # Found matching command
         if match:

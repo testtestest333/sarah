@@ -181,6 +181,7 @@ def _get_latest(config, key, country):
 
             # Start from the end and stop when a numerical value is reached
             for col in reversed(line):
+                print(col)
                 if col:
                     try:
                         value = float(col)
