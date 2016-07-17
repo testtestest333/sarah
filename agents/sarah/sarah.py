@@ -25,11 +25,13 @@ class Sarah:
         action_name = parser.get('action')
         if not action_name:
             # No action?
+            print('Message without action. Skipping...')
             return
 
         action = action_map.get(action_name)
         if not action:
             # No action?
+            print('Action %s not found in mapper. Skipping...' % action_name)
             return
 
         # Obtain database config
@@ -45,11 +47,13 @@ class Sarah:
 
         if not func:
             # No function defined
+            print('No function defined %s. Skipping...' % action_name)
             return self.feedback(
                 'No function associated to the specified action',
                 parser
             )
 
+        print('Executing function')
         result = func(conf, parser)
 
         return self.feedback(result, parser)

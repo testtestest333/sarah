@@ -16,6 +16,11 @@ action_map = {
         'func': wdi.gini
     },
 
+    'gini-avg' : {
+        'conf': 'wdi_csv',
+        'func': wdi.gini_avg
+    },
+
     'gini-year': {
         'conf': 'wdi_csv',
         'func': wdi.gini_year
@@ -24,6 +29,11 @@ action_map = {
     'pib' : {
         'conf': 'wdi_csv',
         'func': wdi.pib
+    },
+
+    'pib-avg' : {
+        'conf': 'wdi_csv',
+        'func': wdi.pib_avg
     },
 
     'pib-year': {
@@ -36,6 +46,11 @@ action_map = {
         'func': wdi.pibpc
     },
 
+    'pibpc-avg': {
+        'conf': 'wdi_csv',
+        'func': wdi.pibpc_avg
+    },
+
     'pibpc-year': {
         'conf': 'wdi_csv',
         'func': wdi.pibpc_year
@@ -44,6 +59,11 @@ action_map = {
     'desemp' : {
         'conf': 'wdi_csv',
         'func': wdi.desemp
+    },
+
+    'desemp-avg' : {
+        'conf': 'wdi_csv',
+        'func': wdi.desemp_avg
     },
 
     'desemp-year' : {
