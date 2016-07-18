@@ -40,7 +40,7 @@ def run(args):
         # File does not exist
         return
 
-    original = args.original.lstrip('sarah ')
+    original = args.original.replace('sarah ', '')
 
     # Parse the commands
     with open(CMD_FILE) as f:
