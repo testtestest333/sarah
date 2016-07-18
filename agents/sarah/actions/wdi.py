@@ -20,6 +20,151 @@ GROUPS = [
     'TSS', 'UMC', 'WLD'
 ]
 
+def _get_max(config, key, year, skip_list=GROUPS):
+    """Obtain max of values for a key in a year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        key (str): Key to search.
+        year (int): Year to obtain (from parser).
+        skip_list (list[str]): IDs to skip.
+
+    Returns:
+        Tuple: Boolean, Value (usually float), Error string
+    """
+    # Check datafile
+    datafile = config.get('path')
+
+    if not os.path.isfile(datafile):
+        return False, None, 'Cant find the database %s' % datafile
+
+
+    # Get year
+    try:
+        year = int(year)
+
+    except:
+        return False, None, 'When do you say?'
+
+    print('Obtaining max of %s for year %d' % (key, year))
+
+    # Obtain value
+    value = 0.0
+    countries = 0
+
+    with open(datafile, 'r', encoding='mac_roman', newline='') as f:
+        reader = csv.reader(f)
+
+        # Read line by line
+        for line in reader:
+
+            # Check key
+            if not key in line:
+                continue
+
+            # Check if it has to be skipped
+            if line[INDEX_ID] in skip_list:
+                continue
+
+            # Get specific column
+            col = INDEX_YEAR + (year - FIRST_YEAR)
+
+            try:
+                col_val = float(line[col])
+
+                if col_val > 0:
+                    # Must be positive
+                    value += col_val
+                    countries += 1
+
+            except:
+                # Not a number
+                pass
+
+
+    # Didn't find key
+    if not value:
+        print('Did not find value')
+        return False, None, None
+
+    # Obtain max
+    result = value / float(countries)
+    print('Found value: %f for %d countries (%f)' % (value, countries, result))
+
+    return True, result, None
+
+def _get_min(config, key, year, skip_list=GROUPS):
+    """Obtain min of values for a key in a year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        key (str): Key to search.
+        year (int): Year to obtain (from parser).
+        skip_list (list[str]): IDs to skip.
+
+    Returns:
+        Tuple: Boolean, Value (usually float), Error string
+    """
+    # Check datafile
+    datafile = config.get('path')
+
+    if not os.path.isfile(datafile):
+        return False, None, 'Cant find the database %s' % datafile
+
+
+    # Get year
+    try:
+        year = int(year)
+
+    except:
+        return False, None, 'When do you say?'
+
+    print('Obtaining min of %s for year %d' % (key, year))
+
+    # Obtain value
+    value = 0.0
+    countries = 0
+
+    with open(datafile, 'r', encoding='mac_roman', newline='') as f:
+        reader = csv.reader(f)
+
+        # Read line by line
+        for line in reader:
+
+            # Check key
+            if not key in line:
+                continue
+
+            # Check if it has to be skipped
+            if line[INDEX_ID] in skip_list:
+                continue
+
+            # Get specific column
+            col = INDEX_YEAR + (year - FIRST_YEAR)
+
+            try:
+                col_val = float(line[col])
+
+                if col_val > 0:
+                    # Must be positive
+                    value += col_val
+                    countries += 1
+
+            except:
+                # Not a number
+                pass
+
+
+    # Didn't find key
+    if not value:
+        print('Did not find value')
+        return False, None, None
+
+    # Obtain min
+    result = value / float(countries)
+    print('Found value: %f for %d countries (%f)' % (value, countries, result))
+
+    return True, result, None
 
 def _get_avg(config, key, year, skip_list=GROUPS):
     """Obtain average of values for a key in a year.
@@ -37,7 +182,7 @@ def _get_avg(config, key, year, skip_list=GROUPS):
     datafile = config.get('path')
 
     if not os.path.isfile(datafile):
-        return False, None, 'No encuentro la base de datos %s' % datafile
+        return False, None, 'Cant find the database %s' % datafile
 
 
     # Get year
@@ -45,7 +190,7 @@ def _get_avg(config, key, year, skip_list=GROUPS):
         year = int(year)
 
     except:
-        return False, None, '¿Cuándo dices?'
+        return False, None, 'When do you say?'
 
     print('Obtaining average of %s for year %d' % (key, year))
 
@@ -111,7 +256,7 @@ def _get_count(config, key, year, skip_list=GROUPS):
     datafile = config.get('path')
 
     if not os.path.isfile(datafile):
-        return False, None, 'No encuentro la base de datos %s' % datafile
+        return False, None, 'Cant find the database %s' % datafile
 
 
     # Get year
@@ -119,7 +264,7 @@ def _get_count(config, key, year, skip_list=GROUPS):
         year = int(year)
 
     except:
-        return False, None, '¿Cuándo dices?'
+        return False, None, 'When do you say?'
 
     print('Obtaining count of %s for year %d' % (key, year))
 
@@ -171,12 +316,12 @@ def _get_latest(config, key, country):
     datafile = config.get('path')
 
     if not os.path.isfile(datafile):
-        return False, None, 'No encuentro la base de datos %s' % datafile
+        return False, None, 'Cant find the database %s' % datafile
 
 
     # Get country
     if not country:
-        return False, None, '¿Qué país es ese?'
+        return False, None, 'Which country?'
 
     print('Obtaining latest %s for country %s' % (key, country))
 
@@ -236,19 +381,19 @@ def _get_year(config, key, country, year):
     datafile = config.get('path')
 
     if not os.path.isfile(datafile):
-        return False, None, 'No encuentro la base de datos %s' % datafile
+        return False, None, 'Cant find the database %s' % datafile
 
 
     # Get country
     if not country:
-        return False, None, '¿Qué país es ese?'
+        return False, None, 'Which country?'
 
     # Get year
     try:
         year = int(year)
 
     except:
-        return False, None, '¿Cuándo dices?'
+        return False, None, 'When do you say?'
 
     print('Obtaining %s for country %s in year %d' % (key, country, year))
 
@@ -310,7 +455,7 @@ def gini(config, parser):
     if status:
         # Found value
         value = value / 100
-        return 'El Gini para %s es %.4f' % (country, value)
+        return 'The Gini index in %s is %.4f' % (country, value)
 
     # No value
     if errmsg:
@@ -319,7 +464,7 @@ def gini(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No hay valor de Gini para %s' % country
+        return 'No Gini index value for %s' % country
 
 
 def gini_avg(config, parser):
@@ -337,7 +482,7 @@ def gini_avg(config, parser):
     if status:
         # Found value
         value = value / 100
-        return 'El Gini medio en %s es %.4f' % (year, value)
+        return 'Average Gini in %s is %.4f' % (year, value)
 
     # No value
     if errmsg:
@@ -346,7 +491,7 @@ def gini_avg(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No hay valor medio de Gini para %s' % year
+        return 'No Gini index value in %s' % year
 
 
 def gini_year(config, parser):
@@ -366,7 +511,7 @@ def gini_year(config, parser):
     if status:
         # Found value
         value = value / 100
-        return 'El Gini para %s en %s es %.4f' % (country, year, value)
+        return 'The Gini index for %s in %s is %.4f' % (country, year, value)
 
     # No value
     if errmsg:
@@ -375,7 +520,7 @@ def gini_year(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No hay valor de Gini para %s en %s' % (country, year)
+        return 'No Gini index value for %s in %s' % (country, year)
 
 
 def pib(config, parser):
@@ -393,7 +538,7 @@ def pib(config, parser):
     if status:
         # Found value
         value = value / 1000000
-        return 'El PIB en %s es de %.2f Millones de $' % (country, value)
+        return 'GDP in %s is %.2f Million $' % (country, value)
 
     # No value
     if errmsg:
@@ -402,7 +547,7 @@ def pib(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No hay PIB en %s' % country
+        return 'No GDP in %s' % country
 
 
 def pib_avg(config, parser):
@@ -420,7 +565,7 @@ def pib_avg(config, parser):
     if status:
         # Found value
         value = value / 1000000
-        return 'El PIB medio en %s es de %.2f Millones de $' % (year, value)
+        return 'Average GDP in %s is %.2f Million $' % (year, value)
 
     # No value
     if errmsg:
@@ -429,7 +574,7 @@ def pib_avg(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No hay PIB medio en %s' % year
+        return 'No GDP in %s' % year
 
 
 def pib_year(config, parser):
@@ -449,7 +594,7 @@ def pib_year(config, parser):
     if status:
         # Found value
         value = value / 1000000
-        return 'El PIB en %s en %s es de %.2f Millones de $' % (
+        return 'GDP in %s on %s is %.2f Million $' % (
             country, year, value)
 
     # No value
@@ -459,7 +604,7 @@ def pib_year(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No hay PIB en %s en %s' % (country, year)
+        return 'No GDP in %s on %s' % (country, year)
 
 
 def pibpc(config, parser):
@@ -476,7 +621,7 @@ def pibpc(config, parser):
 
     if status:
         # Found value
-        return 'El PIB per Cápita de %s es $ %.2f' % (country, value)
+        return 'GDP per Cápita in %s is $ %.2f' % (country, value)
 
     # No value
     if errmsg:
@@ -485,7 +630,7 @@ def pibpc(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No hay PIB per Cápita de %s' % country
+        return 'No GDP per Cápita in %s' % country
 
 
 def pibpc_avg(config, parser):
@@ -502,7 +647,7 @@ def pibpc_avg(config, parser):
 
     if status:
         # Found value
-        return 'El PIB per Cápita medio en %s es $ %.2f' % (year, value)
+        return 'Average GDP per Cápita in %s is $ %.2f' % (year, value)
 
     # No value
     if errmsg:
@@ -511,7 +656,7 @@ def pibpc_avg(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No hay PIB per Cápita medio en %s' % year
+        return 'No average GDP per Cápita in %s' % year
 
 
 def pibpc_year(config, parser):
@@ -530,7 +675,7 @@ def pibpc_year(config, parser):
 
     if status:
         # Found value
-        return 'El PIB per Cápita de %s en %s es $ %.2f' % (
+        return 'GDP per Cápita of %s in %s is $ %.2f' % (
             country, year, value)
 
     # No value
@@ -540,10 +685,10 @@ def pibpc_year(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No hay PIB per Cápita para %s en %s' % (country, year)
+        return 'No GDP per Cápita for %s in %s' % (country, year)
 
 
-def desemp(config, parser):
+def unemp(config, parser):
     """Obtain latest Unenployment for a given country.
 
     Args:
@@ -557,7 +702,7 @@ def desemp(config, parser):
 
     if status:
         # Found value
-        return 'El Desempleo en %s es del %.4f %%' % (country, value)
+        return 'The unemployment rate in %s is %.2f %%' % (country, value)
 
     # No value
     if errmsg:
@@ -566,10 +711,10 @@ def desemp(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No hay tasa de Desempleo en %s' % country
+        return 'No unemployment rate in %s' % country
 
 
-def desemp_avg(config, parser):
+def unemp_avg(config, parser):
     """Obtain average Unemployment in a specific year.
 
     Args:
@@ -583,7 +728,7 @@ def desemp_avg(config, parser):
 
     if status:
         # Found value
-        return 'El Desempleo medio en %s es del %.4f %%' % (year, value)
+        return 'The average unemployment rate in %s is %.2f %%' % (year, value)
 
     # No value
     if errmsg:
@@ -592,10 +737,10 @@ def desemp_avg(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No hay Desempleo medio en %s' % year
+        return 'No average unemployment rate in %s' % year
 
 
-def desemp_year(config, parser):
+def unemp_year(config, parser):
     """Obtain Unemployment for a given country in a specific year.
 
     Args:
@@ -611,7 +756,7 @@ def desemp_year(config, parser):
 
     if status:
         # Found value
-        return 'El Desempleo en %s en %s es del %.4f %%' % (
+        return 'The unemployment rate in %s in %s is %.2f %%' % (
             country, year, value)
 
     # No value
@@ -621,4 +766,4 @@ def desemp_year(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No hay tasa de Desempleo en %s en %s' % (country, year)
+        return 'No unemployment rate in %s in %s' % (country, year)

@@ -26,6 +26,16 @@ action_map = {
         'func': wdi.gini_year
     },
 
+    'gini-max': {
+        'conf': 'wdi_csv',
+        'func': wdi.gini_max
+    },
+
+    'gini-min': {
+        'conf': 'wdi_csv',
+        'func': wdi.gini_min
+    },
+
     'pib' : {
         'conf': 'wdi_csv',
         'func': wdi.pib
@@ -39,6 +49,16 @@ action_map = {
     'pib-year': {
         'conf': 'wdi_csv',
         'func': wdi.pib_year
+    },
+
+    'pib-max': {
+        'conf': 'wdi_csv',
+        'func': wdi.pib_max
+    },
+
+    'pib-min': {
+        'conf': 'wdi_csv',
+        'func': wdi.pib_min
     },
 
     'pibpc': {
@@ -56,18 +76,38 @@ action_map = {
         'func': wdi.pibpc_year
     },
 
-    'desemp' : {
+    'pibpc-max': {
         'conf': 'wdi_csv',
-        'func': wdi.desemp
+        'func': wdi.pibpc_max
     },
 
-    'desemp-avg' : {
+    'pibpc-min': {
         'conf': 'wdi_csv',
-        'func': wdi.desemp_avg
+        'func': wdi.pibpc_min
     },
 
-    'desemp-year' : {
+    'unemp' : {
         'conf': 'wdi_csv',
-        'func': wdi.desemp_year
+        'func': wdi.unemp
+    },
+
+    'unemp-avg' : {
+        'conf': 'wdi_csv',
+        'func': wdi.unemp_avg
+    },
+
+    'unemp-year' : {
+        'conf': 'wdi_csv',
+        'func': wdi.unemp_year
+    },
+
+    'unemp-max': {
+        'conf': 'wdi_csv',
+        'func': wdi.unemp_max
+    },
+
+    'unemp-min': {
+        'conf': 'wdi_csv',
+        'func': wdi.unemp_min
     }
 }
