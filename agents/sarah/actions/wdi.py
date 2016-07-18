@@ -658,6 +658,86 @@ def pib_avg(config, parser):
         return 'No GDP in %s' % year
 
 
+def pib_count(config, parser):
+    """Obtain number of countries with PIB for a given year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        year (int): Year to obtain (from parser).
+    """
+    key = 'NY.GDP.MKTP.CD'
+    year = parser.get('year')
+
+    status, value, errmsg = _get_count(config, key, year)
+
+    if status:
+        # Found value
+        return 'Count of GDP values in %s is %d' % (year, value)
+
+    # No value
+    if errmsg:
+        # Something happened before finding the key
+        return errmsg
+
+    else:
+        # Didn't find value for the specified country
+        return 'No countries with GDP in %s' % year
+
+
+def pib_max(config, parser):
+    """Obtain max PIB for a given year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        year (int): Year to obtain (from parser).
+    """
+    key = 'NY.GDP.MKTP.CD'
+    year = parser.get('year')
+
+    status, value, country, errmsg = _get_max(config, key, year)
+
+    if status:
+        # Found value
+        value = value / 1000000
+        return 'Maximum GDP in %s is %.4f (%s)' % (year, value, country)
+
+    # No value
+    if errmsg:
+        # Something happened before finding the key
+        return errmsg
+
+    else:
+        # Didn't find value for the specified country
+        return 'No maximum GDP in %s' % year
+
+
+def pibmin(config, parser):
+    """Obtain min PIB for a given year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        year (int): Year to obtain (from parser).
+    """
+    key = 'NY.GDP.MKTP.CD'
+    year = parser.get('year')
+
+    status, value, country, errmsg = _get_min(config, key, year)
+
+    if status:
+        # Found value
+        value = value / 1000000
+        return 'Minimum GDP in %s is %.4f (%s)' % (year, value, country)
+
+    # No value
+    if errmsg:
+        # Something happened before finding the key
+        return errmsg
+
+    else:
+        # Didn't find value for the specified country
+        return 'No minimum GDP in %s' % year
+
+
 def pib_year(config, parser):
     """Obtain PIB for a given country in a specific year.
 
@@ -740,6 +820,86 @@ def pibpc_avg(config, parser):
         return 'No average GDP per Cápita in %s' % year
 
 
+def pibpc_count(config, parser):
+    """Obtain number of countries with PIBpc for a given year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        year (int): Year to obtain (from parser).
+    """
+    key = 'NY.GDP.PCAP.CD'
+    year = parser.get('year')
+
+    status, value, errmsg = _get_count(config, key, year)
+
+    if status:
+        # Found value
+        return 'Count of GDP per Cápita in %s is %d' % (year, value)
+
+    # No value
+    if errmsg:
+        # Something happened before finding the key
+        return errmsg
+
+    else:
+        # Didn't find value for the specified country
+        return 'No countries with GDP per Cápita in %s' % year
+
+
+def pibpc_max(config, parser):
+    """Obtain max PIBpc for a given year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        year (int): Year to obtain (from parser).
+    """
+    key = 'NY.GDP.PCAP.CD'
+    year = parser.get('year')
+
+    status, value, country, errmsg = _get_max(config, key, year)
+
+    if status:
+        # Found value
+        value = value / 1000000
+        return 'Maximum GDP per Cápita in %s is %.4f (%s)' % (year, value, country)
+
+    # No value
+    if errmsg:
+        # Something happened before finding the key
+        return errmsg
+
+    else:
+        # Didn't find value for the specified country
+        return 'No maximum GDP per Cápita index value in %s' % year
+
+
+def pibpcmin(config, parser):
+    """Obtain min PIBpc for a given year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        year (int): Year to obtain (from parser).
+    """
+    key = 'NY.GDP.PCAP.CD'
+    year = parser.get('year')
+
+    status, value, country, errmsg = _get_min(config, key, year)
+
+    if status:
+        # Found value
+        value = value / 1000000
+        return 'Minimum GDP per Cápita in %s is %.4f (%s)' % (year, value, country)
+
+    # No value
+    if errmsg:
+        # Something happened before finding the key
+        return errmsg
+
+    else:
+        # Didn't find value for the specified country
+        return 'No minimum GDP per Cápita index value in %s' % year
+
+
 def pibpc_year(config, parser):
     """Obtain PIBpc for a given country in a specific year.
 
@@ -819,6 +979,84 @@ def unemp_avg(config, parser):
     else:
         # Didn't find value for the specified country
         return 'No average unemployment rate in %s' % year
+
+
+def unemp_count(config, parser):
+    """Obtain number of countries with Unemployment for a given year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        year (int): Year to obtain (from parser).
+    """
+    key = 'SL.UEM.TOTL.NE.ZS'
+    year = parser.get('year')
+
+    status, value, errmsg = _get_count(config, key, year)
+
+    if status:
+        # Found value
+        return 'Count of unemployment values in %s is %d' % (year, value)
+
+    # No value
+    if errmsg:
+        # Something happened before finding the key
+        return errmsg
+
+    else:
+        # Didn't find value for the specified country
+        return 'No countries with unemployment values in %s' % year
+
+
+def unemp_max(config, parser):
+    """Obtain max Unemployement for a given year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        year (int): Year to obtain (from parser).
+    """
+    key = 'SL.UEM.TOTL.NE.ZS'
+    year = parser.get('year')
+
+    status, value, country, errmsg = _get_max(config, key, year)
+
+    if status:
+        # Found value
+        return 'Maximum unemployement in %s is %.4f (%s)' % (year, value, country)
+
+    # No value
+    if errmsg:
+        # Something happened before finding the key
+        return errmsg
+
+    else:
+        # Didn't find value for the specified country
+        return 'No maximum unemployement value in %s' % year
+
+
+def unempmin(config, parser):
+    """Obtain min Unemployement for a given year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        year (int): Year to obtain (from parser).
+    """
+    key = 'SL.UEM.TOTL.NE.ZS'
+    year = parser.get('year')
+
+    status, value, country, errmsg = _get_min(config, key, year)
+
+    if status:
+        # Found value
+        return 'Minimum unemployement in %s is %.4f (%s)' % (year, value, country)
+
+    # No value
+    if errmsg:
+        # Something happened before finding the key
+        return errmsg
+
+    else:
+        # Didn't find value for the specified country
+        return 'No minimum unemployement value in %s' % year
 
 
 def unemp_year(config, parser):
