@@ -20,151 +20,6 @@ GROUPS = [
     'TSS', 'UMC', 'WLD'
 ]
 
-def _get_max(config, key, year, skip_list=GROUPS):
-    """Obtain max of values for a key in a year.
-
-    Args:
-        config (ConfigParser): Information about datafile to use.
-        key (str): Key to search.
-        year (int): Year to obtain (from parser).
-        skip_list (list[str]): IDs to skip.
-
-    Returns:
-        Tuple: Boolean, Value (usually float), Error string
-    """
-    # Check datafile
-    datafile = config.get('path')
-
-    if not os.path.isfile(datafile):
-        return False, None, 'Cant find the database %s' % datafile
-
-
-    # Get year
-    try:
-        year = int(year)
-
-    except:
-        return False, None, 'When do you say?'
-
-    print('Obtaining max of %s for year %d' % (key, year))
-
-    # Obtain value
-    value = 0.0
-    countries = 0
-
-    with open(datafile, 'r', encoding='mac_roman', newline='') as f:
-        reader = csv.reader(f)
-
-        # Read line by line
-        for line in reader:
-
-            # Check key
-            if not key in line:
-                continue
-
-            # Check if it has to be skipped
-            if line[INDEX_ID] in skip_list:
-                continue
-
-            # Get specific column
-            col = INDEX_YEAR + (year - FIRST_YEAR)
-
-            try:
-                col_val = float(line[col])
-
-                if col_val > 0:
-                    # Must be positive
-                    value += col_val
-                    countries += 1
-
-            except:
-                # Not a number
-                pass
-
-
-    # Didn't find key
-    if not value:
-        print('Did not find value')
-        return False, None, None
-
-    # Obtain max
-    result = value / float(countries)
-    print('Found value: %f for %d countries (%f)' % (value, countries, result))
-
-    return True, result, None
-
-def _get_min(config, key, year, skip_list=GROUPS):
-    """Obtain min of values for a key in a year.
-
-    Args:
-        config (ConfigParser): Information about datafile to use.
-        key (str): Key to search.
-        year (int): Year to obtain (from parser).
-        skip_list (list[str]): IDs to skip.
-
-    Returns:
-        Tuple: Boolean, Value (usually float), Error string
-    """
-    # Check datafile
-    datafile = config.get('path')
-
-    if not os.path.isfile(datafile):
-        return False, None, 'Cant find the database %s' % datafile
-
-
-    # Get year
-    try:
-        year = int(year)
-
-    except:
-        return False, None, 'When do you say?'
-
-    print('Obtaining min of %s for year %d' % (key, year))
-
-    # Obtain value
-    value = 0.0
-    countries = 0
-
-    with open(datafile, 'r', encoding='mac_roman', newline='') as f:
-        reader = csv.reader(f)
-
-        # Read line by line
-        for line in reader:
-
-            # Check key
-            if not key in line:
-                continue
-
-            # Check if it has to be skipped
-            if line[INDEX_ID] in skip_list:
-                continue
-
-            # Get specific column
-            col = INDEX_YEAR + (year - FIRST_YEAR)
-
-            try:
-                col_val = float(line[col])
-
-                if col_val > 0:
-                    # Must be positive
-                    value += col_val
-                    countries += 1
-
-            except:
-                # Not a number
-                pass
-
-
-    # Didn't find key
-    if not value:
-        print('Did not find value')
-        return False, None, None
-
-    # Obtain min
-    result = value / float(countries)
-    print('Found value: %f for %d countries (%f)' % (value, countries, result))
-
-    return True, result, None
 
 def _get_avg(config, key, year, skip_list=GROUPS):
     """Obtain average of values for a key in a year.
@@ -365,6 +220,152 @@ def _get_latest(config, key, country):
     return False, None, None
 
 
+def _get_max(config, key, year, skip_list=GROUPS):
+    """Obtain max of values for a key in a year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        key (str): Key to search.
+        year (int): Year to obtain (from parser).
+        skip_list (list[str]): IDs to skip.
+
+    Returns:
+        Tuple: Boolean, Value (usually float), country, Error string
+    """
+    # Check datafile
+    datafile = config.get('path')
+
+    if not os.path.isfile(datafile):
+        return False, None, 'Cant find the database %s' % datafile
+
+
+    # Get year
+    try:
+        year = int(year)
+
+    except:
+        return False, None, 'When do you say?'
+
+    print('Obtaining max of %s for year %d' % (key, year))
+
+    # Obtain value
+    value = 0.0
+    country = None
+
+    with open(datafile, 'r', encoding='mac_roman', newline='') as f:
+        reader = csv.reader(f)
+
+        # Read line by line
+        for line in reader:
+
+            # Check key
+            if not key in line:
+                continue
+
+            # Check if it has to be skipped
+            if line[INDEX_ID] in skip_list:
+                continue
+
+            # Get specific column
+            col = INDEX_YEAR + (year - FIRST_YEAR)
+
+            try:
+                col_val = float(line[col])
+
+                if col_val > value:
+                    # Got new max
+                    value = col_val
+                    country = line[INDEX_COUNTRY]
+
+            except:
+                # Not a number
+                pass
+
+
+    # Didn't find key
+    if not value:
+        print('Did not find value')
+        return False, None, None, None
+
+    # Obtain max
+    print('Found value: %f for %d (%s)' % (value, year, country))
+
+    return True, value, country, None
+
+
+def _get_min(config, key, year, skip_list=GROUPS):
+    """Obtain min of values for a key in a year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        key (str): Key to search.
+        year (int): Year to obtain (from parser).
+        skip_list (list[str]): IDs to skip.
+
+    Returns:
+        Tuple: Boolean, Value (usually float), Error string
+    """
+    # Check datafile
+    datafile = config.get('path')
+
+    if not os.path.isfile(datafile):
+        return False, None, 'Cant find the database %s' % datafile
+
+
+    # Get year
+    try:
+        year = int(year)
+
+    except:
+        return False, None, 'When do you say?'
+
+    print('Obtaining max of %s for year %d' % (key, year))
+
+    # Obtain value
+    value = None
+    country = None
+
+    with open(datafile, 'r', encoding='mac_roman', newline='') as f:
+        reader = csv.reader(f)
+
+        # Read line by line
+        for line in reader:
+
+            # Check key
+            if not key in line:
+                continue
+
+            # Check if it has to be skipped
+            if line[INDEX_ID] in skip_list:
+                continue
+
+            # Get specific column
+            col = INDEX_YEAR + (year - FIRST_YEAR)
+
+            try:
+                col_val = float(line[col])
+
+                if value == None or col_val < value:
+                    # First element to check or new min
+                    value = col_val
+                    country = line[INDEX_COUNTRY]
+
+            except:
+                # Not a number
+                pass
+
+
+    # Didn't find key
+    if not value:
+        print('Did not find value')
+        return False, None, None, None
+
+    # Obtain max
+    print('Found value: %f for %d (%s)' % (value, year, country))
+
+    return True, value, country, None
+
+
 def _get_year(config, key, country, year):
     """Obtain latest value for a given country.
 
@@ -492,6 +493,86 @@ def gini_avg(config, parser):
     else:
         # Didn't find value for the specified country
         return 'No Gini index value in %s' % year
+
+
+def gini_count(config, parser):
+    """Obtain number of countries with GINI for a given year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        year (int): Year to obtain (from parser).
+    """
+    key = 'SI.POV.GINI'
+    year = parser.get('year')
+
+    status, value, errmsg = _get_count(config, key, year)
+
+    if status:
+        # Found value
+        return 'Count of Gini in %s is %d' % (year, value)
+
+    # No value
+    if errmsg:
+        # Something happened before finding the key
+        return errmsg
+
+    else:
+        # Didn't find value for the specified country
+        return 'No countries with Gini index value in %s' % year
+
+
+def gini_max(config, parser):
+    """Obtain max GINI for a given year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        year (int): Year to obtain (from parser).
+    """
+    key = 'SI.POV.GINI'
+    year = parser.get('year')
+
+    status, value, country, errmsg = _get_max(config, key, year)
+
+    if status:
+        # Found value
+        value = value / 100
+        return 'Maximum Gini in %s is %.4f (%s)' % (year, value, country)
+
+    # No value
+    if errmsg:
+        # Something happened before finding the key
+        return errmsg
+
+    else:
+        # Didn't find value for the specified country
+        return 'No maximum Gini index value in %s' % year
+
+
+def gini_min(config, parser):
+    """Obtain min GINI for a given year.
+
+    Args:
+        config (ConfigParser): Information about datafile to use.
+        year (int): Year to obtain (from parser).
+    """
+    key = 'SI.POV.GINI'
+    year = parser.get('year')
+
+    status, value, country, errmsg = _get_min(config, key, year)
+
+    if status:
+        # Found value
+        value = value / 100
+        return 'Minimum Gini in %s is %.4f (%s)' % (year, value, country)
+
+    # No value
+    if errmsg:
+        # Something happened before finding the key
+        return errmsg
+
+    else:
+        # Didn't find value for the specified country
+        return 'No minimum Gini index value in %s' % year
 
 
 def gini_year(config, parser):
