@@ -71,8 +71,8 @@ talk = {
     "ralph": "Mi gato se llama guantes",
     "¿has jugado a pokemon go?": "Obviamente. Sólo tengo zubats, tho",
     "¿que equipo eres?": "Adivina",
-    "¿valor?": "How about no?"
-    "¿mystic?": "Antes muerta"
+    "¿valor?": "How about no?",
+    "¿mystic?": "Antes muerta",
     "¿instinct?": "Nadie espera a la tormenta"
 }
 

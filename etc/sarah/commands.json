@@ -2,7 +2,6 @@
     "^gini (\\w+)$": "action=gini&country=$0",
     "^gini (\\w+) (\\d+)$": "action=gini-year&country=$0&year=$1",
     "^average gini (\\d+)$": "action=gini-avg&year=$0",
-    "^count gini (\\d+)$": "action=gini-count&year=$0",
     "^max gini (\\d+)$": "action=gini-max&year=$0",
     "^min gini (\\d+)$": "action=gini-min&year=$0",
 

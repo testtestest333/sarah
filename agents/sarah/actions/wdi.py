@@ -711,7 +711,7 @@ def pib_max(config, parser):
         return 'No maximum GDP in %s' % year
 
 
-def pibmin(config, parser):
+def pib_min(config, parser):
     """Obtain min PIB for a given year.
 
     Args:
@@ -873,7 +873,7 @@ def pibpc_max(config, parser):
         return 'No maximum GDP per Cápita index value in %s' % year
 
 
-def pibpcmin(config, parser):
+def pibpc_min(config, parser):
     """Obtain min PIBpc for a given year.
 
     Args:
@@ -1033,7 +1033,7 @@ def unemp_max(config, parser):
         return 'No maximum unemployement value in %s' % year
 
 
-def unempmin(config, parser):
+def unemp_min(config, parser):
     """Obtain min Unemployement for a given year.
 
     Args:

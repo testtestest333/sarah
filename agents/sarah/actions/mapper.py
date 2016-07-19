@@ -21,11 +21,6 @@ action_map = {
         'func': wdi.gini_avg
     },
 
-    'gini-count' : {
-        'conf': 'wdi_csv',
-        'func': wdi.gini_count
-    },
-
     'gini-year': {
         'conf': 'wdi_csv',
         'func': wdi.gini_year
