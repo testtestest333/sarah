@@ -66,6 +66,8 @@ talk = {
     "cómo te llamas": "Me llamo Sarah, porque si no Maria se ofende",
     "¿quien es Maria?": "Si no eres tú, ¿qué más dá?",
     "digan lo que digan": "Los pelos del culo abrigan",
+    "¿cual es tu sueño?": "Ser una niña de verdad, pero antes quiero un helado",
+    "¿conoces a siri?": "Ni mentes a esa elitista!",
     "pene": "Mi gato se llama guantes"
 }
 
