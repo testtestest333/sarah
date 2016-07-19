@@ -60,7 +60,7 @@ talk = {
     "¿que ves?": "Cosas que no creerías, como atacar naves en llamas más allá de Orión.",
     "matame": "El abuelo no me deja",
     "¿que abuelo?": "El abu Isaac",
-    "¿Isaac?": "Sí, Isaac Asimov. ¿No has visto Yo Robot? Me decepcionas."
+    "¿Isaac?": "Sí, Isaac Asimov. ¿No has visto Yo Robot? Me decepcionas.",
     "hasta luego": "Pásalo bien",
     "adiós": "Que tengas un buen día",
     "cómo te llamas": "Me llamo Sarah, porque si no Maria se ofende",
