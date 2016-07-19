@@ -68,7 +68,12 @@ talk = {
     "digan lo que digan": "Los pelos del culo abrigan",
     "¿cual es tu sueño?": "Ser una niña de verdad, pero antes quiero un helado",
     "¿conoces a siri?": "Ni mentes a esa elitista!",
-    "pene": "Mi gato se llama guantes"
+    "ralph": "Mi gato se llama guantes",
+    "¿has jugado a pokemon go?": "Obviamente. Sólo tengo zubats, tho",
+    "¿que equipo eres?": "Adivina",
+    "¿valor?": "How about no?"
+    "¿mystic?": "Antes muerta"
+    "¿instinct?": "Nadie espera a la tormenta"
 }
 
 def get():
