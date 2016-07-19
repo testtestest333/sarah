@@ -26,6 +26,11 @@ action_map = {
         'func': wdi.gini_year
     },
 
+    'gini-count': {
+        'conf': 'wdi_csv',
+        'func': wdi.gini_count
+    },
+
     'gini-max': {
         'conf': 'wdi_csv',
         'func': wdi.gini_max
@@ -61,6 +66,11 @@ action_map = {
         'func': wdi.pib_min
     },
 
+    'pib-count': {
+        'conf': 'wdi_csv',
+        'func': wdi.pib_count
+    },
+
     'pibpc': {
         'conf': 'wdi_csv',
         'func': wdi.pibpc
@@ -86,6 +96,11 @@ action_map = {
         'func': wdi.pibpc_min
     },
 
+    'pibpc-count': {
+        'conf': 'wdi_csv',
+        'func': wdi.pibpc_count
+    },
+
     'unemp' : {
         'conf': 'wdi_csv',
         'func': wdi.unemp
@@ -109,5 +124,10 @@ action_map = {
     'unemp-min': {
         'conf': 'wdi_csv',
         'func': wdi.unemp_min
+    },
+
+    'unemp-count': {
+        'conf': 'wdi_csv',
+        'func': wdi.unemp_count
     }
 }

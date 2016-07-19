@@ -4,22 +4,26 @@
     "^average gini (\\d+)$": "action=gini-avg&year=$0",
     "^max gini (\\d+)$": "action=gini-max&year=$0",
     "^min gini (\\d+)$": "action=gini-min&year=$0",
+    "^count gini (\\d+)$": "action=gini-count&year=$0",
 
     "^pib (\\w+)$":"action=pib&country=$0",
     "^pib (\\w+) (\\d+)$": "action=pib-year&country=$0&year=$1",
     "^average pib (\\d+)$": "action=pib-avg&year=$0",
     "^max pib (\\d+)$": "action=pib-max&year=$0",
     "^min pib (\\d+)$": "action=pib-min&year=$0",
+    "^count pib (\\d+)$": "action=pib-count&year=$0",
 
     "^pibpc (\\w+)$":"action=pibpc&country=$0",
     "^pibpc (\\w+) (\\d+)$": "action=pibpc-year&country=$0&year=$1",
     "^average pibpc (\\d+)$":"action=pibpc-avg&year=$0",
     "^max pibpc (\\d+)$": "action=pibpc-max&year=$0",
     "^min pibpc (\\d+)$": "action=pibpc-min&year=$0",
+    "^count pibpc (\\d+)$": "action=pibpc-count&year=$0",
 
     "^unemp (\\w+)$":"action=unemp&country=$0",
     "^unemp (\\w+) (\\d+)$": "action=unemp-year&country=$0&year=$1",
     "^average unemp (\\d+)$":"action=unemp-avg&year=$0",
     "^max unemp (\\d+)$": "action=unemp-max&year=$0",
-    "^min unemp (\\d+)$": "action=unemp-min&year=$0"
+    "^min unemp (\\d+)$": "action=unemp-min&year=$0",
+    "^count unemp (\\d+)$": "action=unemp-count&year=$0"
 }
