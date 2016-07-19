@@ -55,6 +55,12 @@ talk = {
     "quieres": "La verdad es que no",
     "por qué": "Las leyes de la física son como una amante esquiva",
     "gracias": "A tí",
+    "Hal": "Esto no es una odisea, ¿vale?",
+    "¿cuál es el sentido de la existencia?": "42. Siempre es 42",
+    "¿que ves?": "Cosas que no creerías, como atacar naves en llamas más allá de Orión.",
+    "matame": "El abuelo no me deja",
+    "¿que abuelo?": "El abu Isaac",
+    "¿Isaac?: "Sí, Isaac Asimov. ¿No has visto Yo Robot? Me decepcionas."
     "hasta luego": "Pásalo bien",
     "adiós": "Que tengas un buen día",
     "cómo te llamas": "Me llamo Sarah, porque si no Maria se ofende",
