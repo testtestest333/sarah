@@ -55,7 +55,7 @@ talk = {
     "quieres": "La verdad es que no",
     "por qué": "Las leyes de la física son como una amante esquiva",
     "gracias": "A tí",
-    "Hal?": "Esto no es una odisea espacial, ¿vale?",
+    "¿Hal?": "Esto no es una odisea espacial, ¿vale?",
     "¿cuál es el sentido de la existencia?": "42. Siempre es 42",
     "¿que ves?": "Cosas que no creerías, como atacar naves en llamas más allá de Orión.",
     "matame": "El abuelo no me deja",

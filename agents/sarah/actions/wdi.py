@@ -509,7 +509,7 @@ def gini_count(config, parser):
 
     if status:
         # Found value
-        return 'Count of Gini in %s is %d' % (year, value)
+        return 'The number of countries with Gini index in %s is %d' % (year, value)
 
     # No value
     if errmsg:
@@ -628,7 +628,7 @@ def pib(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No GDP in %s' % country
+        return 'No GDP values in %s' % country
 
 
 def pib_avg(config, parser):
@@ -655,7 +655,7 @@ def pib_avg(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No GDP in %s' % year
+        return 'No countries with GDP value in %s' % year
 
 
 def pib_count(config, parser):
@@ -672,7 +672,7 @@ def pib_count(config, parser):
 
     if status:
         # Found value
-        return 'Count of GDP values in %s is %d' % (year, value)
+        return 'The number of countries with GDP values in %s is %d' % (year, value)
 
     # No value
     if errmsg:
@@ -681,7 +681,7 @@ def pib_count(config, parser):
 
     else:
         # Didn't find value for the specified country
-        return 'No countries with GDP in %s' % year
+        return 'No countries with GDP values in %s' % year
 
 
 def pib_max(config, parser):
@@ -834,7 +834,7 @@ def pibpc_count(config, parser):
 
     if status:
         # Found value
-        return 'Count of GDP per Cápita in %s is %d' % (year, value)
+        return 'The number of countries with GDP per Cápita in %s is %d' % (year, value)
 
     # No value
     if errmsg:
@@ -860,7 +860,7 @@ def pibpc_max(config, parser):
 
     if status:
         # Found value
-        value = value / 1000000
+        value = value
         return 'Maximum GDP per Cápita in %s is %.4f (%s)' % (year, value, country)
 
     # No value
@@ -887,7 +887,7 @@ def pibpc_min(config, parser):
 
     if status:
         # Found value
-        value = value / 1000000
+        value = value
         return 'Minimum GDP per Cápita in %s is %.4f (%s)' % (year, value, country)
 
     # No value
@@ -995,7 +995,7 @@ def unemp_count(config, parser):
 
     if status:
         # Found value
-        return 'Count of unemployment values in %s is %d' % (year, value)
+        return 'The number of countries with unemployment values in %s is %d' % (year, value)
 
     # No value
     if errmsg:
@@ -1021,7 +1021,7 @@ def unemp_max(config, parser):
 
     if status:
         # Found value
-        return 'Maximum unemployement in %s is %.4f (%s)' % (year, value, country)
+        return 'Maximum unemployement in %s is %.2f (%s)' % (year, value, country)
 
     # No value
     if errmsg:
@@ -1047,7 +1047,7 @@ def unemp_min(config, parser):
 
     if status:
         # Found value
-        return 'Minimum unemployement in %s is %.4f (%s)' % (year, value, country)
+        return 'Minimum unemployement in %s is %.2f (%s)' % (year, value, country)
 
     # No value
     if errmsg:
